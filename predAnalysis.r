@@ -1,0 +1,13 @@
+# Predictive Analysis 
+install.packages("e1071")
+install.packages("caTools")
+library(e1071)
+library(caTools)
+data(iris)
+set.seed(200)
+split <- sample.split(iris$Species, SplitRatio = 0.75)
+train <- subset(iris, split == TRUE)
+test <- subset(iris, split == FALSE)
+svm1 <- svm(Species~., data = train)
+prediction <- predict(svm1, test)
+(xtab <- table(test$Species, prediction))
